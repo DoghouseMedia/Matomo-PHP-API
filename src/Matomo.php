@@ -2,7 +2,7 @@
 
 namespace VisualAppeal;
 
-use Httpful\Exception\NetworkErrorException;
+use Httpful\Exception\ConnectionErrorException;
 use Httpful\Request;
 use Httpful\Response;
 use InvalidArgumentException;
