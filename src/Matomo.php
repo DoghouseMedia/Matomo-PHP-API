@@ -541,14 +541,14 @@ class Matomo
         // Send the request
         try {
             $response = $req->send();
-        } catch (NetworkErrorException $e) {
+        } catch (ConnectionErrorException $e) {
             // Network error, e.g. timeout or connection refused
-            throw new InvalidRequestException($e->getMessage(), $e->getCode(), $e);
+            throw new InvalidRequestException($e->getMessage(), $e->getCurlErrorNumber(), $e);
         }
 
         // Validate if the response was successful
-        if ($response->getStatusCode() !== 200) {
-            throw new InvalidRequestException($response->getRawBody(), $response->getStatusCode());
+        if ($response->code !== 200) {
+            throw new InvalidRequestException($response->getRawBody(), $response->code);
         }
 
         // Sometimes the response was unsuccessful, but the status code was 200
